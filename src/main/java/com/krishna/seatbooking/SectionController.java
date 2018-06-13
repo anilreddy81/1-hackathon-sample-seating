@@ -22,7 +22,7 @@ public class SectionController {
 
     @RequestMapping("/")
     public String home(Model model) {
-    	val x = sectionsRepository.findAll();
+    	val x = (val) sectionsRepository.findAll();
     	model.addAttribute("sections", x);
     	
         return "home";
