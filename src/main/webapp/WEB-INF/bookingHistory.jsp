@@ -13,28 +13,10 @@
 <script src="/js/seating-handler.js"></script>
 <link rel="stylesheet"  type="text/css" href="/css/seating-style.css">
 </head>
+
 <body>
-	<h3>Welcome User ${username}</h3>
-	<form:form method="POST" modelAttribute="sectionForm"
-		action="/bookTickets" class="form-signin">
-	Select Section:
-	<form:select id="sections" name='role' path="sectionId" multiple="true">
-			<c:forEach items="${sections}" var="section">
-				<option value="${section.id}">${section.name}</option>
-			</c:forEach>
-		</form:select>
 
-		<!-- <div id="seatContainer"></div> -->
-Select seat:
-		<form:select id="seatContainer" path="seatId" multiple="true">
-		</form:select>
-<br/>	
-		<button id="bookTickets" class="btn btn-lg btn-primary btn-block"
-			type="submit">Book Ticket</button>
-	</form:form>
-
-<br/>
-	<%-- <h2>Booking History</h2>
+	<h2>Booking History</h2>
 
 	<div>
 		<c:forEach items="${bookingHistory}" var="bookedSection">
@@ -44,7 +26,8 @@ Select seat:
 		</c:forEach>
 	</div>
 
-	<div id="messageStatus"></div> --%>
+	<div id="messageStatus"></div>
 
+	
 </body>
 </html>

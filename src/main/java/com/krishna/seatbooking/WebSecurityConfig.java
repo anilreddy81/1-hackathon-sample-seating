@@ -23,11 +23,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 
-		/*
-		 * http.authorizeRequests().antMatchers("/public/**").permitAll().anyRequest().
-		 * authenticated().and().httpBasic() .and().csrf().disable();
-		 */
-
 		http.authorizeRequests().antMatchers("/css/**", "/js/**", "/registration").permitAll().anyRequest()
 				.authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
 	}
@@ -54,20 +49,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
 	}
-
-	/*
-	 * @Autowired public void configureGlobal(AuthenticationManagerBuilder auth)
-	 * throws Exception {
-	 * auth.inMemoryAuthentication().withUser("seethayya").password("{noop}s18n").
-	 * roles("USER"); }
-	 */
-
-	/*
-	 * @Bean
-	 * 
-	 * @Override public UserDetailsService userDetailsService() { UserDetails user =
-	 * User.withDefaultPasswordEncoder().username("user").password("password").roles
-	 * ("USER") .build(); return new InMemoryUserDetailsManager(user); }
-	 */
 
 }

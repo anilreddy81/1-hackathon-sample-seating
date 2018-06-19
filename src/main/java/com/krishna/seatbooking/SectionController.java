@@ -46,16 +46,6 @@ public class SectionController {
 		String userName = SeatingAppUserDetailsService.findLoggedInUsername();
 		model.addAttribute("username", userName);
 		model.addAttribute("sectionForm", new SectionForm());
-		Optional<List<Section>> bookedSeats = sectionsRepository.findBySeatsUserName(userName);
-		Set<SectionForm> bookingHistory = new HashSet<>();
-		if (bookedSeats.isPresent()) {
-			List<Section> sections = bookedSeats.get();
-			bookingHistory = sections.stream().flatMap(s -> s.getSeats().stream())
-					.filter(seat -> seat.getUserName() != null && seat.getUserName().equals(userName))
-					.map(seat -> buildSectionForm(seat)).collect(Collectors.toSet());
-		}
-
-		model.addAttribute("bookingHistory", bookingHistory);
 
 		return "home";
 	}
@@ -70,9 +60,26 @@ public class SectionController {
 	@RequestMapping(value = "/bookTickets")
 	public String bookTickets(@ModelAttribute("sectionForm") SectionForm sectionForm, BindingResult bindingResult,
 			Model model) {
-		sectionService.bookSeat(sectionForm.getSectionId(), sectionForm.getSeatId(),
-				SeatingAppUserDetailsService.findLoggedInUsername());
-		return "redirect:/home";
+		if(null!=sectionForm.getSectionId()&&null!=sectionForm.getSeatId()) {
+			sectionService.bookSeat(sectionForm.getSectionId(), sectionForm.getSeatId(),
+					SeatingAppUserDetailsService.findLoggedInUsername());
+			
+			String userName = SeatingAppUserDetailsService.findLoggedInUsername();
+			Optional<List<Section>> bookedSeats = sectionsRepository.findBySeatsUserName(userName);
+			Set<SectionForm> bookingHistory = new HashSet<>();
+			if (bookedSeats.isPresent()) {
+				List<Section> sections = bookedSeats.get();
+				bookingHistory = sections.stream().flatMap(s -> s.getSeats().stream())
+						.filter(seat -> seat.getUserName() != null && seat.getUserName().equals(userName))
+						.map(seat -> buildSectionForm(seat)).collect(Collectors.toSet());
+			}
+
+			model.addAttribute("bookingHistory", bookingHistory);
+
+
+			return "bookingHistory";
+		}else
+			return "redirect:/home";
 	}
 
 	private SectionForm buildSectionForm(Seat seat) {

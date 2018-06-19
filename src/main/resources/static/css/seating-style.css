@@ -1,14 +1,24 @@
 body {
 	font-family: 'Lato', sans-serif;
+	background-color:darkseagreen;
 }
 a {
 	color: #b71a4c;
 }
 .front-indicator {
-	width: 145px;
+	width: 270px;
 	margin: 5px 32px 15px 32px;
-	background-color: #f6f6f6;	
-	color: #adadad;
+	background-color: darkcyan;	
+	color: black;
+	text-align: center;
+	padding: 3px;
+	border-radius: 5px;
+}
+.front-indicator1 {
+	width: 170px;
+	margin: 5px 32px 15px 32px;
+	background-color: darkcyan;	
+	color: black;
 	text-align: center;
 	padding: 3px;
 	border-radius: 5px;
@@ -24,12 +34,15 @@ a {
 	height: 200px;
 }
 .container1 {
-    width: 15%;
+    width: 20%;
     height: 200px;
     float: left;
+    margin-left: 20%;
+    margin-top: -23px;
 }
 .container2 {
-    margin-left: 15%;
+    margin-left: 50%;
+    margin-top: 50px;
     height: 200px;
 }
 .booking-details {
@@ -102,6 +115,13 @@ span.seatCharts-legendDescription {
 	margin: 10px 0;
 	font-size: 14px;
 }
+.registartionBtn{
+	margin-left: 74px;
+}
+.loginBtn{
+	margin-left: 150px;
+}
+
 #selected-seats {
 	max-height: 90px;
 	overflow-y: scroll;
